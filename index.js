@@ -4,33 +4,21 @@ const path = require('path');
 const http = require('http');
 const request  = require('request');
 const bodyParser = require('body-parser');
+const members = require('./members');
 
+const logger = require('./middleware/logger');
 
 const app = express();
 app.use(morgan('dev'));
 app.use(bodyParser.urlencoded({extends:false}));
 app.use((bodyParser.json()));
 
-const members = [
-    {
-        id: 1,
-        name: 'updated',
-        price: 999.99,
 
-    },
-    {
-        id: 2,
-        name: 'Ruwan',
-        price: 853216.456,
-    },
 
-    {
-        id: 3,
-        name: 'Bandara',
-        price: 8245.0236,
-    }
+//Init middleware
+app.use(logger);
 
-];
+
 
 // app.get('/', (req, res) => {
 //     res.sendFile(path.join(__dirname, 'public', 'index.html'));
