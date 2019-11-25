@@ -39,13 +39,15 @@ const members = [
 //     res.sendFile(path.join(__dirname, 'public', 'about.html'));
 // });
 
-app.get('/api/members', (req, res) => {
+
+//Gets All Members
+app.get('/api/members', (req, res) => { res.json(members);
 
    /* request.get('https://express-api-janaka.herokuapp.com/products', (request,result,next) =>{
         res.json(result.body);
     });*/
 
-   res.json(members);
+
 });
 
 app.use(express.static(path.join(__dirname, 'public')));
