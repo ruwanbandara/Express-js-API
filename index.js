@@ -19,7 +19,7 @@ app.use((bodyParser.json()));
 app.use(logger);
 
 
-
+//
 // app.get('/', (req, res) => {
 //     res.sendFile(path.join(__dirname, 'public', 'index.html'));
 // });
@@ -35,6 +35,13 @@ app.get('/api/members', (req, res) => { res.json(members);
         res.json(result.body);
     });*/
 
+
+});
+
+//get singale member
+
+app.get('/api/members/:id',(req, res) =>{
+    res.json(members.filter(member => member.id === parseInt(req.params.id)));
 
 });
 
