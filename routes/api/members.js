@@ -37,5 +37,17 @@ router.post('/', (req, res) =>{
     // res.send(req.body);
     // console.log(req.body)
 
-})
+    const newMember = {
+        id: uuid.v4(),
+        name: req.body.name,
+        price: req.body.price
+    }
+
+    if (!newMember.name || !newMember.price){
+        return res.status(400).json({mag: 'Please include a name and price'});
+
+    }
+     members.push(newMember);
+    res.json(members);
+});
 module.exports = router;
