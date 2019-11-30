@@ -4,9 +4,10 @@ const path = require('path');
 const http = require('http');
 const request  = require('request');
 const bodyParser = require('body-parser');
-const members = require('./members');
-
 const logger = require('./middleware/logger');
+
+
+
 
 const app = express();
 app.use(morgan('dev'));
@@ -28,32 +29,11 @@ app.use(logger);
 // });
 
 
-//Gets All Members
-app.get('/api/members', (req, res) => { res.json(members);
 
-   /* request.get('https://express-api-janaka.herokuapp.com/products', (request,result,next) =>{
-        res.json(result.body);
-    });*/
-
-
-});
-
-//get singale member
-
-app.get('/api/members/:id',(req, res) =>{
-    const found = members.some(member => member.id === parseInt(req.params.id));
-    if(found){
-        res.json(members.filter(member => member.id === parseInt(req.params.id)));
-
-
-    }else{
-        res.status(400).json({mag: `No member with the id of ${req.params.id}`});
-
-    }
-
-});
 
 app.use(express.static(path.join(__dirname, 'public')));
+
+app.use('/api/members', require('./routes/api/members'));
 
 const PORT = process.env.PORT || 5000;
 
