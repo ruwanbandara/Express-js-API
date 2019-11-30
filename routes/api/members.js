@@ -1,11 +1,11 @@
 const express = require('express');
 const router = express.Router();
-const members = require('./members');
+const members = require('../../Members');
 
 
 
 //Gets All Members
-router.get('/api/members', (req, res) => { res.json(members);
+router.get('/', (req, res) => { res.json(members);
 
     /* request.get('https://express-api-janaka.herokuapp.com/products', (request,result,next) =>{
          res.json(result.body);
@@ -16,7 +16,8 @@ router.get('/api/members', (req, res) => { res.json(members);
 
 //get singale member
 
-router.get('/api/members/:id',(req, res) =>{
+router.get('/:id',(req, res) =>{
+
     const found = members.some(member => member.id === parseInt(req.params.id));
     if(found){
         res.json(members.filter(member => member.id === parseInt(req.params.id)));
