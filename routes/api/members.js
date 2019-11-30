@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const members = require('../../Members');
+const uuid = require('uuid');
 
 
 
@@ -30,4 +31,11 @@ router.get('/:id',(req, res) =>{
 
 });
 
+//create member
+router.post('/', (req, res) =>{
+    // get post data in body variable
+    // res.send(req.body);
+    // console.log(req.body)
+
+})
 module.exports = router;
