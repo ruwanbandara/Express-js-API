@@ -5,13 +5,26 @@ const http = require('http');
 const request  = require('request');
 const bodyParser = require('body-parser');
 const logger = require('./middleware/logger');
-const uuid = require('uuid');
-
-
-
-
+const exphbs  = require('express-handlebars');
+const members = require('./Members')
 
 const app = express();
+
+// Handlebars Middleware
+app.engine('handlebars', exphbs({defaultLayout: 'main'}));
+app.set('view engine', 'handlebars');
+
+
+//Home page route
+app.get('/', (req, res) => res.render('index',{
+    title: 'Member app',
+    members
+}));
+
+// Set Static folder
+app.use(express.static(path.join(__dirname, 'public')));
+
+
 app.use(morgan('dev'));
 app.use(bodyParser.urlencoded({extends:false}));
 app.use((bodyParser.json()));
@@ -36,7 +49,6 @@ app.use(logger);
 
 
 
-app.use(express.static(path.join(__dirname, 'public')));
 
 //Member API Routes
 app.use('/api/members', require('./routes/api/members'));
